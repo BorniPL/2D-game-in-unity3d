@@ -13,10 +13,15 @@ public class HeroController : MonoBehaviour {
        
     public bool isGrounded;
     private Animator myAnimator;
+
+    public Vector3 respawnPosition;
+    public LevelManager theLevelManager;
 	// Use this for initialization
 	void Start () {
         rgdbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        respawnPosition = transform.position;
+        theLevelManager = FindObjectOfType<LevelManager>();
 	}
 	
 	// Update is called once per frame
@@ -48,4 +53,16 @@ public class HeroController : MonoBehaviour {
         myAnimator.SetFloat("Speed", Mathf.Abs( rgdbody.velocity.x));
         myAnimator.SetBool("Grounded", isGrounded);
 	}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "KillZone")
+        {
+
+            theLevelManager.Respawn();
+        }
+        if(other.tag == "CheckPoint")
+        {
+            respawnPosition = other.transform.position;
+        }
+    }
 }
