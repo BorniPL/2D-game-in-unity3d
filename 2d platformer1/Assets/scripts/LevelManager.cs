@@ -5,6 +5,7 @@ public class LevelManager : MonoBehaviour {
 
     public float respawnTime;
     public HeroController PlayerController;
+    public GameObject explosion;
 	// Use this for initialization
 	void Start () {
         PlayerController = FindObjectOfType<HeroController>();
@@ -22,6 +23,8 @@ public class LevelManager : MonoBehaviour {
     public IEnumerator RespawnCo()
     {
         PlayerController.gameObject.SetActive(false);
+
+        Instantiate(explosion, PlayerController.transform.position, PlayerController.transform.rotation);
 
         yield return new WaitForSeconds(respawnTime);
 
