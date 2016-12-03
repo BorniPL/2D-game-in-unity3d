@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour {
     public float respawnTime;
     public HeroController PlayerController;
     public GameObject explosion;
+    public int coinCount;
 	// Use this for initialization
 	void Start () {
         PlayerController = FindObjectOfType<HeroController>();
@@ -30,5 +31,9 @@ public class LevelManager : MonoBehaviour {
 
         PlayerController.transform.position = PlayerController.respawnPosition;
         PlayerController.gameObject.SetActive(true);
+    }
+    public void addCoins(int coinsToAdd)
+    {
+        coinCount += coinsToAdd;
     }
 }
